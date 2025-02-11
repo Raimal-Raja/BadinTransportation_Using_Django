@@ -1,0 +1,51 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.img-fluid {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #007bff;
+}
+
+p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+#map {
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 1s ease-in-out;
+}
