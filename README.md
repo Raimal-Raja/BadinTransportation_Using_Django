@@ -1,4 +1,4 @@
-# 🚗 Local Ride Sharing Service - Badin
+# 🚗 Local Ride Service - Badin
 
 ## 🌟 Project Overview
 A comprehensive ride-sharing platform developed for the Badin community, inspired by Bykea. This web application connects local vehicle owners with passengers, creating employment opportunities while providing convenient transportation services.
