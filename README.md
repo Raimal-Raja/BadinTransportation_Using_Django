@@ -144,21 +144,6 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-### Database Configuration
-```python
-# settings.py
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'your_db_name',
-        'USER': 'your_username',
-        'PASSWORD': 'your_password',
-        'HOST': 'localhost',
-        'PORT': '1521',
-    }
-}
-```
-
 ## 🌐 API Integration
 ## 📊 Database Schema
 
