@@ -1,17 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Correct the key to 'rider_id'
-    const riderId = localStorage.getItem('rider_id'); // Use 'rider_id' instead of 'riderId'
+    const riderId = localStorage.getItem('rider_id'); // Use 'rider_id'
+    console.log('Retrieved Rider ID:', riderId); // Debug: Log the retrieved rider ID
+
     if (!riderId) {
-        window.location.href = '/login/'; // Redirect to login if riderId is not found
+        console.log('No Rider ID Found, Redirecting to Login'); // Debug: Log redirection
+        window.location.href = '/login/';
     }
 
     fetchOrders(riderId);
 });
 
 function fetchOrders(riderId) {
+    console.log('Fetching Orders for Rider ID:', riderId); // Debug: Log the rider ID
     fetch(`/api/orders/${riderId}/`)
         .then(response => response.json())
         .then(data => {
+            console.log('Orders Data:', data); // Debug: Log the orders data
             const recentOrders = data.recent;
             const previousOrders = data.previous;
 
@@ -37,20 +41,4 @@ function fetchOrders(riderId) {
             });
         })
         .catch(error => console.error('Error fetching orders:', error));
-}
-
-function toggleAvailability() {
-    const riderId = localStorage.getItem('riderId');
-    const button = document.getElementById('availabilityButton');
-
-    fetch(`/api/toggle_availability/${riderId}/`, {
-        method: 'POST',
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                button.textContent = data.is_available ? 'Mark as Unavailable' : 'Mark as Available';
-            }
-        })
-        .catch(error => console.error('Error toggling availability:', error));
 }

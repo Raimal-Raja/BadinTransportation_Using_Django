@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('riderForm');
     const successMessage = document.querySelector('.success-message');
     const errorMessage = document.querySelector('.error-message');
 
-    // Validation functions remain the same
+    // Validation functions
     const validators = {
         name: (value) => {
             const isValid = value.length >= 2 && /^[a-zA-Z\s]+$/.test(value);
@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         },
         password: (value) => {
-            const isValid = value.length >= 8 && 
-                           /[A-Z]/.test(value) && 
-                           /[a-z]/.test(value) && 
-                           /[0-9]/.test(value);
+            const isValid = value.length >= 8 &&
+                /[A-Z]/.test(value) &&
+                /[a-z]/.test(value) &&
+                /[0-9]/.test(value);
             return {
                 isValid,
                 message: isValid ? '' : 'Password must be at least 8 characters with uppercase, lowercase, and numbers'
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Show message functions
+    // Show error message
     function showError(message) {
         errorMessage.textContent = message;
         errorMessage.style.display = 'block';
@@ -76,29 +76,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
 
+    // Show success message
     function showSuccess(message) {
         successMessage.textContent = message;
         successMessage.style.display = 'block';
     }
 
-    // Real-time validation
+    // Real-time validation for each field
     Object.keys(validators).forEach(field => {
         const input = document.getElementById(field);
         if (input) {
-            input.addEventListener('input', function() {
+            input.addEventListener('input', function () {
                 validateField(this);
             });
 
-            input.addEventListener('blur', function() {
+            input.addEventListener('blur', function () {
                 validateField(this, true);
             });
         }
     });
 
+    // Validate a single field
     function validateField(input, showMessage = false) {
         const validation = validators[input.id](input.value);
         const errorDisplay = input.nextElementSibling;
-        
+
         if (validation.isValid) {
             input.classList.remove('is-invalid');
             input.classList.add('is-valid');
@@ -113,16 +115,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorDisplay.style.display = showMessage ? 'block' : 'none';
             }
         }
-        
+
         return validation.isValid;
     }
 
     // Form submission
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault(); // Prevent default form submission
+
         let isFormValid = true;
-        
+
         // Validate all fields
         Object.keys(validators).forEach(field => {
             const input = document.getElementById(field);

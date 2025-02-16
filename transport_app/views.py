@@ -96,9 +96,12 @@ def api_login(request):
             email = data.get('email')
             password = data.get('password')
             
+            print(f"Login Attempt - Email: {email}, Password: {password}")  # Debug: Log email and password
+
             # Check if the rider exists
             rider = Rider.objects.filter(email=email).first()
             if not rider:
+                print("User does not exist")  # Debug: Log if user doesn't exist
                 return JsonResponse({
                     'success': False, 
                     'message': 'User does not exist. Please register first.'
@@ -106,23 +109,27 @@ def api_login(request):
             
             # Verify the password
             if check_password(password, rider.password):
+                print("Login Successful")  # Debug: Log successful login
                 return JsonResponse({
                     'success': True, 
                     'rider_id': rider.id,
                     'redirect_url': '/dashboard/'
                 })
             else:
+                print("Invalid Password")  # Debug: Log invalid password
                 return JsonResponse({
                     'success': False, 
                     'message': 'Invalid password'
                 })
                 
         except json.JSONDecodeError:
+            print("Invalid Request Format")  # Debug: Log JSON decode error
             return JsonResponse({
                 'success': False, 
                 'message': 'Invalid request format'
             })
             
+    print("Invalid Request Method")  # Debug: Log invalid request method
     return JsonResponse({
         'success': False, 
         'message': 'Invalid request method'
