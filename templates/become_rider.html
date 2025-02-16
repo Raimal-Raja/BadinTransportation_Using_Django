@@ -260,7 +260,7 @@
              <div class="col-md-6">
                  <div class="form-container">
                     <section class="rider-form">
-                    <form id="riderForm" action="become_rider" method="POST">
+                    <form id="riderForm" action="become_rider" method="POST" onsubmit="return false;">
                         {% csrf_token %}
                          <h2 class="text-center mb-4">Become a Rider</h2>
                          <div class="mb-3 form-group">

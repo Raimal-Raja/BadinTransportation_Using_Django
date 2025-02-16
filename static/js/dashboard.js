@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const riderId = localStorage.getItem('riderId'); // Assume riderId is stored after login
+    // Correct the key to 'rider_id'
+    const riderId = localStorage.getItem('rider_id'); // Use 'rider_id' instead of 'riderId'
     if (!riderId) {
         window.location.href = '/login/'; // Redirect to login if riderId is not found
     }

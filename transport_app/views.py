@@ -28,6 +28,9 @@ def become_rider(request):
             if Rider.objects.filter(email=email).exists():
                 return JsonResponse({"success": False, "message": "Email already registered"}, status=400)
 
+            # Hash the password before saving
+            hashed_password = make_password(password)
+
             Rider.objects.create(
                 name=name,
                 phone_number=phone_number,
@@ -35,7 +38,7 @@ def become_rider(request):
                 vehicle_type=vehicle_type,
                 vehicle_number=vehicle_number,
                 email=email,
-                password=make_password(password)
+                password=hashed_password  # Save the hashed password
             )
 
             return JsonResponse({"success": True, "message": "Registration successful"}, status=201)
@@ -44,6 +47,7 @@ def become_rider(request):
             return JsonResponse({"success": False, "message": f"Error during registration: {str(e)}"}, status=500)
 
     return render(request, "become_rider.html")
+
 
 
 def book_rider(request):
@@ -69,9 +73,11 @@ def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
-        rider = Rider.objects.filter(email=email, password=password).first()
-        if rider:
+        rider = Rider.objects.filter(email=email).first()
+        if rider and check_password(password, rider.password):
             return redirect('dashboard')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid email or password'})
     return render(request, 'login.html')
 
 def dashboard(request):
@@ -90,7 +96,7 @@ def api_login(request):
             email = data.get('email')
             password = data.get('password')
             
-            # Check if user exists
+            # Check if the rider exists
             rider = Rider.objects.filter(email=email).first()
             if not rider:
                 return JsonResponse({
@@ -98,8 +104,8 @@ def api_login(request):
                     'message': 'User does not exist. Please register first.'
                 })
             
-            # Verify password
-            if rider.password == password:  # Note: In production, use proper password hashing
+            # Verify the password
+            if check_password(password, rider.password):
                 return JsonResponse({
                     'success': True, 
                     'rider_id': rider.id,
@@ -130,6 +136,7 @@ def api_orders(request, rider_id):
     previous_orders = Booking.objects.filter(rider_id=rider_id).order_by('-booking_time')[5:].values(
         'customer_name', 'pickup_location', 'destination')
     return JsonResponse({'recent': list(recent_orders), 'previous': list(previous_orders)})
+
 
 @csrf_exempt
 def api_toggle_availability(request, rider_id):
