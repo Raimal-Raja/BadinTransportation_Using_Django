@@ -1,0 +1,3 @@
+# Direct dependencies identified from source imports.
+# Use an isolated environment; these are not a locked or fully runtime-tested environment.
+Django
