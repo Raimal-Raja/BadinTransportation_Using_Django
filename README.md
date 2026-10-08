@@ -2,11 +2,10 @@
 
 Django transport-service prototype for Badin with rider registration, booking models, templates, and a web interface.
 
-## Repository guide
+## Setup and repository reference
 
-### Contents
+### Project structure
 
-- [README.md](README.md)
 - [badin_transport](badin_transport)
 - [db.sqlite3](db.sqlite3)
 - [manage.py](manage.py)
@@ -41,9 +40,15 @@ python manage.py runserver
 
 ### Configuration and limitations
 
+Run migrations before starting the local Django server. Booking and rider-registration flows need separate browser verification; a Django system check does not verify complete trip or payment workflows.
+
 ### Validation
 
-Reviewed on 2026-10-08. Django manage.py check identified no issues. Python syntax checks passed; live bookings and live scraping were not exercised.
+Audit: 2026-10-08. Repository structure, setup instructions and description were reviewed. 15 existing Python files passed syntax checks; changed files and new regression tests were checked separately. 7 JavaScript files passed node --check; JSX/TypeScript production builds were not run. Django system checks passed. Syntax checks do not establish full runtime correctness. External APIs, live scraping, GUI interaction, notebook training and production deployment were not comprehensively exercised.
+
+### Repository description
+
+The short GitHub description is provided in [REPOSITORY_DESCRIPTION.md](REPOSITORY_DESCRIPTION.md).
 
 ### Contributions
 
