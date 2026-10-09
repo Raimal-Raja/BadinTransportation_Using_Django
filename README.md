@@ -44,11 +44,7 @@ Run migrations before starting the local Django server. Booking and rider-regist
 
 ### Validation
 
-Audit: 2026-10-08. Repository structure, setup instructions and description were reviewed. 15 existing Python files passed syntax checks; changed files and new regression tests were checked separately. 7 JavaScript files passed node --check; JSX/TypeScript production builds were not run. Django system checks passed. Syntax checks do not establish full runtime correctness. External APIs, live scraping, GUI interaction, notebook training and production deployment were not comprehensively exercised.
-
-### Repository description
-
-The short GitHub description is provided in [REPOSITORY_DESCRIPTION.md](REPOSITORY_DESCRIPTION.md).
+Recorded checks from the previous maintenance review (2026-10-08): 15 existing Python files passed syntax checks; changed files and new regression tests were checked separately. 7 JavaScript files passed node --check; JSX/TypeScript production builds were not run. Django system checks passed. Syntax checks do not establish full runtime correctness. External APIs, live scraping, GUI interaction, notebook training and production deployment were not comprehensively exercised.
 
 ### Contributions
 
